@@ -1,5 +1,8 @@
 <main class="todo-container">
   <h3 class="title">To Do Tasks</h3>
 
-  <app-task-list></app-task-list>
+  <app-task-list
+    *ngIf="tasks$ | async as tasks"
+    [tasks]="tasks"
+  ></app-task-list>
 </main>

@@ -1,0 +1,12 @@
+.todo-container {
+  margin: auto;
+  max-width: 60dvw;
+  max-height: 80dvh;
+  overflow: auto;
+
+  > .title {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid gray;
+  }
+}

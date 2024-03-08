@@ -1,1 +1,6 @@
-{{ tasks | json }}
+<ul
+  *ngFor="let task of tasks; index as i; trackBy: trackByTaskId"
+  class="tasklist-container"
+>
+  <app-task [task]="task"></app-task>
+</ul>

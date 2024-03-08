@@ -2,8 +2,7 @@
   <p class="title">{{ task.title }}</p>
 
   <div class="actions">
-    <span class="material-icons action">edit</span>
-
-    <span class="material-icons action">delete</span>
+    <app-button icon="edit" [onClick]="onClickEdit"></app-button>
+    <app-button icon="delete" [onClick]="onClickDelete"></app-button>
   </div>
 </li>

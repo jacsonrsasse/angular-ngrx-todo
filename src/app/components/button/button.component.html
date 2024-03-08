@@ -1,1 +1,7 @@
-<p>button works!</p>
+<button (click)="onClickButton()" class="button">
+  <ng-container *ngIf="title">
+    <p>{{ title }}</p>
+  </ng-container>
+
+  <span class="material-icons action">{{ icon }}</span>
+</button>

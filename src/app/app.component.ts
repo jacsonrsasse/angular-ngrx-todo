@@ -9,11 +9,12 @@ import {
 } from './ngrx/actions/task-list.actions';
 import { getTaskList } from './ngrx/selectors/task-list.selectors';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from './components/button/button.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, TaskListComponent],
+  imports: [CommonModule, RouterOutlet, TaskListComponent, ButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -35,4 +36,6 @@ export class AppComponent implements OnInit {
       this.store.dispatch(loadTaskListSuccess({ entities: tasks }));
     });
   }
+
+  onClickAdd() {}
 }

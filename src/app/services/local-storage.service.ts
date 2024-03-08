@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadTaskList } from '../actions/task-list.actions';
+import { loadTaskList } from '../ngrx/actions/task-list.actions';
 import { Observable, of } from 'rxjs';
-import { Task } from '../states/task-list.state';
+import { Task } from '../ngrx/states/task-list.state';
 
 @Injectable({
   providedIn: 'root',

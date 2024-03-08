@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TaskListComponent } from './task-list/task-list.component';
+import { TaskListComponent } from './components/task-list/task-list.component';
 import { LocalStorageService } from './services/local-storage.service';
 import { Store, select } from '@ngrx/store';
-import { loadTaskList, loadTaskListSuccess } from './actions/task-list.actions';
-import { getTaskList } from './selectors/task-list.selectors';
+import {
+  loadTaskList,
+  loadTaskListSuccess,
+} from './ngrx/actions/task-list.actions';
+import { getTaskList } from './ngrx/selectors/task-list.selectors';
 import { CommonModule } from '@angular/common';
 
 @Component({

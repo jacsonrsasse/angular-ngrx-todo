@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Task } from '../states/task-list.state';
+import { Task } from '../../ngrx/states/task-list.state';
 
 @Component({
   selector: 'app-task',

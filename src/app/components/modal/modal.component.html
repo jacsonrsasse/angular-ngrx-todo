@@ -1,0 +1,16 @@
+<div class="modal-container">
+  <div class="header">
+    <h3>{{ isNew ? "New" : "Edit" }} Task</h3>
+  </div>
+
+  <div class="body">Aqui</div>
+
+  <div class="footer">
+    <app-button title="Save" [onClick]="onClickSave.bind(this)"></app-button>
+    <app-button
+      title="Cancel"
+      type="secondary"
+      [onClick]="onClickCancel.bind(this)"
+    ></app-button>
+  </div>
+</div>

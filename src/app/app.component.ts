@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskListComponent } from './task-list/task-list.component';
 import { LocalStorageService } from './services/local-storage.service';
 import { Store, select } from '@ngrx/store';
 import {
@@ -10,6 +10,9 @@ import {
 import { getTaskList } from './ngrx/selectors/task-list.selectors';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { Task } from './ngrx/states/task-list.state';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +24,8 @@ import { ButtonComponent } from './components/button/button.component';
 export class AppComponent implements OnInit {
   constructor(
     private readonly store: Store,
-    private readonly localStorageService: LocalStorageService
+    private readonly localStorageService: LocalStorageService,
+    private readonly modalService: ModalService
   ) {}
 
   tasks$ = this.store.pipe(select(getTaskList));
@@ -35,7 +39,14 @@ export class AppComponent implements OnInit {
     this.localStorageService.listAll$().subscribe((tasks) => {
       this.store.dispatch(loadTaskListSuccess({ entities: tasks }));
     });
+    this.modalService.task$.subscribe((task) => {
+      console.log(task);
+    });
   }
 
-  onClickAdd() {}
+  saveTask(task: Pick<Task, 'title' | 'description'>) {}
+
+  onClickAdd() {
+    this.modalService.openModalNewTask();
+  }
 }

@@ -1,0 +1,31 @@
+.modal-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #333;
+  min-width: 320px;
+  max-width: 850px;
+  max-height: 500px;
+  padding: 24px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+
+  > .header {
+    text-align: center;
+  }
+
+  > .body {
+    border: 1px solid gray;
+    border-left: none;
+    border-right: none;
+    margin: 12px 0;
+    padding: 12px 0;
+  }
+
+  > .footer {
+    display: flex;
+    gap: 8px;
+  }
+}

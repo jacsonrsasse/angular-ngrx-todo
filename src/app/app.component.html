@@ -1,7 +1,11 @@
 <main class="todo-container">
   <div class="header">
     <h3 class="title">To Do Tasks</h3>
-    <app-button icon="add" [onClick]="onClickAdd"></app-button>
+    <app-button
+      icon="add"
+      type="icon"
+      [onClick]="onClickAdd.bind(this)"
+    ></app-button>
   </div>
 
   <div>
@@ -11,3 +15,5 @@
     ></app-task-list>
   </div>
 </main>
+
+<!-- <app-modal title="Teste" #modal (saveDate)="saveTask($event)"> </app-modal> -->

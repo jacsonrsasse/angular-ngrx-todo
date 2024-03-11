@@ -3,10 +3,36 @@
     <h3>{{ isNew ? "New" : "Edit" }} Task</h3>
   </div>
 
-  <div class="body">Aqui</div>
+  <form class="body" [formGroup]="taskForm">
+    <div class="field-container">
+      <label for="title" class="label">Title</label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        class="field"
+        formControlName="title"
+      />
+    </div>
+
+    <div class="field-container">
+      <label for="description" class="label">Description</label>
+      <textarea
+        name="description"
+        id="description"
+        rows="10"
+        class="field"
+        formControlName="description"
+      ></textarea>
+    </div>
+  </form>
 
   <div class="footer">
-    <app-button title="Save" [onClick]="onClickSave.bind(this)"></app-button>
+    <app-button
+      title="Save"
+      [onClick]="onClickSave.bind(this)"
+      [disabled]="taskForm.invalid"
+    ></app-button>
     <app-button
       title="Cancel"
       type="secondary"

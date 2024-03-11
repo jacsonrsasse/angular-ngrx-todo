@@ -11,6 +11,7 @@ import { Component, Input } from '@angular/core';
 export class ButtonComponent {
   @Input({ required: false }) icon!: string;
   @Input({ required: false }) title!: string;
+  @Input({ required: false }) disabled!: boolean;
   @Input() type: 'primary' | 'secondary' | 'icon' = 'primary';
   @Input() onClick!: Function;
 

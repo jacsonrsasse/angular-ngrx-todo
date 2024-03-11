@@ -1,4 +1,9 @@
-<button (click)="onClickButton()" class="button" [ngClass]="'-' + type">
+<button
+  (click)="onClickButton()"
+  class="button"
+  [ngClass]="'-' + type + (disabled ? ' -disabled' : '')"
+  [disabled]="disabled"
+>
   <ng-container *ngIf="title">
     <p>{{ title }}</p>
   </ng-container>

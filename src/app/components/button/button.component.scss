@@ -1,3 +1,10 @@
+@mixin hover($bg-color) {
+  &:not(.-disabled):hover {
+    background-color: $bg-color;
+    color: white;
+  }
+}
+
 .button {
   padding: 8px;
   border-radius: 8px;
@@ -14,9 +21,7 @@
   &.-primary {
     background-color: green;
 
-    &:hover {
-      background-color: #00d300;
-    }
+    @include hover(#00d300);
   }
 
   &.-secondary {
@@ -24,15 +29,16 @@
     border-color: grey;
     border-width: 1px;
     border-style: solid;
+
+    @include hover(grey);
   }
 
   &.-icon {
     padding: 4px;
+    @include hover(grey);
   }
 
-  &.-secondary:hover,
-  &.-icon:hover {
-    background-color: grey;
-    color: white;
+  &.-disabled {
+    cursor: not-allowed;
   }
 }

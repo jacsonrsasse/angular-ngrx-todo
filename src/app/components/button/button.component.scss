@@ -1,5 +1,5 @@
 .button {
-  padding: 4px;
+  padding: 8px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
@@ -9,7 +9,30 @@
   justify-content: center;
   align-items: center;
 
-  &:hover {
+  height: 32px;
+
+  &.-primary {
+    background-color: green;
+
+    &:hover {
+      background-color: #00d300;
+    }
+  }
+
+  &.-secondary {
+    background-color: transparent;
+    border-color: grey;
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  &.-icon {
+    padding: 4px;
+  }
+
+  &.-secondary:hover,
+  &.-icon:hover {
     background-color: grey;
+    color: white;
   }
 }

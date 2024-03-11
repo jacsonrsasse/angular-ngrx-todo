@@ -9,11 +9,14 @@ import { Component, Input } from '@angular/core';
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-  @Input() icon!: string;
-  @Input() onClick!: () => void;
-  @Input({ required: false }) title!: () => void;
+  @Input({ required: false }) icon!: string;
+  @Input({ required: false }) title!: string;
+  @Input() type: 'primary' | 'secondary' | 'icon' = 'primary';
+  @Input() onClick!: Function;
 
   onClickButton() {
-    this.onClick();
+    if (this.onClick) {
+      this.onClick();
+    }
   }
 }

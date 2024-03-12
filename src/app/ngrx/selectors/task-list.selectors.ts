@@ -3,12 +3,12 @@ import { TaskListState } from '../states/task-list.state';
 
 const taskListState = createFeatureSelector<TaskListState>('taskList');
 
-export const getTaskList = createSelector(
+export const taskListSelector = createSelector(
   taskListState,
   (state: TaskListState) => state.entities
 );
 
-export const getIsLoading = createSelector(
+export const isLoadingSelector = createSelector(
   taskListState,
   (state: TaskListState) => state.isLoading
 );

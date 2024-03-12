@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { TaskListState } from '../states/task-list.state';
 import {
+  appendTask,
   loadTaskList,
   loadTaskListError,
   loadTaskListSuccess,
@@ -25,5 +26,9 @@ export const taskListReducer = createReducer(
   on(loadTaskListError, (state) => ({
     ...state,
     isLoading: false,
+  })),
+  on(appendTask, (state, { entity }) => ({
+    ...state,
+    entities: [...state.entities, entity],
   }))
 );

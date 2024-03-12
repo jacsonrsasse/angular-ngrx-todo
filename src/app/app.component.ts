@@ -1,18 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TaskListComponent } from './task-list/task-list.component';
-import { LocalStorageService } from './services/local-storage.service';
-import { Store, select } from '@ngrx/store';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { Store } from '@ngrx/store';
 import {
+  appendTask,
   loadTaskList,
   loadTaskListSuccess,
 } from './ngrx/actions/task-list.actions';
-import { getTaskList } from './ngrx/selectors/task-list.selectors';
+import {
+  isLoadingSelector,
+  taskListSelector,
+} from './ngrx/selectors/task-list.selectors';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
-import { ModalComponent } from './components/modal/modal.component';
 import { Task } from './ngrx/states/task-list.state';
 import { ModalService } from './services/modal.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,30 +24,28 @@ import { ModalService } from './services/modal.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
+  tasks$!: Observable<Task[]>;
+  isLoading$!: Observable<boolean>;
+
   constructor(
     private readonly store: Store,
-    private readonly localStorageService: LocalStorageService,
     private readonly modalService: ModalService
-  ) {}
+  ) {
+    console.log('Aqui');
+    this.tasks$ = this.store.select(taskListSelector);
+    this.isLoading$ = this.store.select(isLoadingSelector);
 
-  tasks$ = this.store.pipe(select(getTaskList));
-
-  ngOnInit(): void {
-    this.store.dispatch(loadTaskList());
-    this.setUpObservers();
-  }
-
-  private setUpObservers() {
-    this.localStorageService.listAll$().subscribe((tasks) => {
-      this.store.dispatch(loadTaskListSuccess({ entities: tasks }));
-    });
     this.modalService.task$.subscribe((task) => {
-      console.log(task);
+      this.store.dispatch(appendTask({ entity: task }));
     });
+
+    this.loadTasks();
   }
 
-  saveTask(task: Pick<Task, 'title' | 'description'>) {}
+  private loadTasks() {
+    this.store.dispatch(loadTaskList());
+  }
 
   onClickAdd() {
     this.modalService.openModalNewTask();

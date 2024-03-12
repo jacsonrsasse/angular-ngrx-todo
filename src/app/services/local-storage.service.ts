@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { loadTaskList } from '../ngrx/actions/task-list.actions';
 import { Observable, of } from 'rxjs';
 import { Task } from '../ngrx/states/task-list.state';
 
@@ -8,22 +6,21 @@ import { Task } from '../ngrx/states/task-list.state';
   providedIn: 'root',
 })
 export class LocalStorageService {
-  constructor(private readonly store: Store) {}
+  constructor() {}
+
+  private getItemTasks(): Task[] {
+    const tasks = localStorage.getItem('tasks');
+    return tasks ? JSON.parse(tasks) : [];
+  }
 
   listAll$(): Observable<Task[]> {
-    this.store.dispatch(loadTaskList());
+    return of(this.getItemTasks());
+  }
 
-    const tasks = localStorage.getItem('tasks');
+  appendTask(task: Task) {
+    const tasks = this.getItemTasks();
+    tasks.push(task);
 
-    return of(
-      tasks
-        ? JSON.parse(tasks)
-        : [
-            {
-              id: 1,
-              title: 'teste',
-            },
-          ]
-    );
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Task } from '../ngrx/states/task-list.state';
+import { Task } from '../../ngrx/states/task-list.state';
 import { CommonModule } from '@angular/common';
-import { TaskComponent } from '../components/task/task.component';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-task-list',

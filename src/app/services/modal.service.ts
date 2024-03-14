@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ModalComponent } from '../components/modal/modal.component';
-import { Task } from '../ngrx/states/task-list.state';
+import { Task } from '../ngrx/states/task.state';
 import { Subject } from 'rxjs';
 
 @Injectable({

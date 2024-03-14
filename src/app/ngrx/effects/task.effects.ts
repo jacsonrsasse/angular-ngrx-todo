@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as TaskListActions from '../actions/task-list.actions';
+import * as TaskListActions from '../actions/task.actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
 
 @Injectable()
@@ -16,9 +16,7 @@ export class TaskEffects {
       ofType(TaskListActions.loadTaskList),
       mergeMap(() =>
         this.localStorageService.listAll$().pipe(
-          map((tasks) =>
-            TaskListActions.loadTaskListSuccess({ entities: tasks })
-          ),
+          map((tasks) => TaskListActions.loadTaskListSuccess({ tasks })),
           catchError(() => of(TaskListActions.loadTaskListError()))
         )
       )
@@ -28,8 +26,8 @@ export class TaskEffects {
   appendTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TaskListActions.appendTask),
-      mergeMap(({ entity }) =>
-        of(this.localStorageService.appendTask(entity)).pipe(
+      mergeMap(({ task }) =>
+        of(this.localStorageService.appendTask(task)).pipe(
           map(() => TaskListActions.complete())
         )
       )

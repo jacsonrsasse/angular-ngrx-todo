@@ -6,14 +6,14 @@ import {
   appendTask,
   loadTaskList,
   loadTaskListSuccess,
-} from './ngrx/actions/task-list.actions';
+} from './ngrx/actions/task.actions';
 import {
   isLoadingSelector,
   taskListSelector,
-} from './ngrx/selectors/task-list.selectors';
+} from './ngrx/selectors/task.selectors';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
-import { Task } from './ngrx/states/task-list.state';
+import { Task } from './ngrx/states/task.state';
 import { ModalService } from './services/modal.service';
 import { Observable } from 'rxjs';
 
@@ -32,12 +32,12 @@ export class AppComponent {
     private readonly store: Store,
     private readonly modalService: ModalService
   ) {
-    console.log('Aqui');
     this.tasks$ = this.store.select(taskListSelector);
     this.isLoading$ = this.store.select(isLoadingSelector);
 
     this.modalService.task$.subscribe((task) => {
-      this.store.dispatch(appendTask({ entity: task }));
+      this.store.dispatch(appendTask({ task }));
+      this.loadTasks();
     });
 
     this.loadTasks();

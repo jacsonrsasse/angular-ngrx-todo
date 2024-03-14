@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Task } from '../ngrx/states/task-list.state';
+import { Task } from '../ngrx/states/task.state';
 
 @Injectable({
   providedIn: 'root',

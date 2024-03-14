@@ -1,34 +1,34 @@
 import { createReducer, on } from '@ngrx/store';
-import { TaskListState } from '../states/task-list.state';
+import { TaskState } from '../states/task.state';
 import {
   appendTask,
   loadTaskList,
   loadTaskListError,
   loadTaskListSuccess,
-} from '../actions/task-list.actions';
+} from '../actions/task.actions';
 
-export const initialState: TaskListState = {
-  entities: [],
+export const initialState: TaskState = {
+  tasks: [],
   isLoading: false,
 };
 
-export const taskListReducer = createReducer(
+export const taskReducer = createReducer(
   initialState,
   on(loadTaskList, (state) => ({
     ...state,
     isLoading: true,
   })),
-  on(loadTaskListSuccess, (state, { entities }) => ({
+  on(loadTaskListSuccess, (state, { tasks }) => ({
     ...state,
-    entities,
+    tasks,
     isLoading: false,
   })),
   on(loadTaskListError, (state) => ({
     ...state,
     isLoading: false,
   })),
-  on(appendTask, (state, { entity }) => ({
+  on(appendTask, (state, { task }) => ({
     ...state,
-    entities: [...state.entities, entity],
+    entities: [...state.tasks, task],
   }))
 );

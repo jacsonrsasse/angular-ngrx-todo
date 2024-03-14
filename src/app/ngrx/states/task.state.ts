@@ -4,7 +4,7 @@ export interface Task {
   description?: string;
 }
 
-export interface TaskListState {
-  entities: Task[];
+export interface TaskState {
+  tasks: Task[];
   isLoading: boolean;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, delay, of } from 'rxjs';
 import { Task } from '../ngrx/states/task.state';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class LocalStorageService {
   }
 
   listAll$(): Observable<Task[]> {
-    return of(this.getItemTasks());
+    return of(this.getItemTasks()).pipe(delay(1000));
   }
 
   appendTask(task: Task) {

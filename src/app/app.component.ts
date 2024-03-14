@@ -37,7 +37,6 @@ export class AppComponent {
 
     this.modalService.task$.subscribe((task) => {
       this.store.dispatch(appendTask({ task }));
-      this.loadTasks();
     });
 
     this.loadTasks();

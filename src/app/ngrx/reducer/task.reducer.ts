@@ -14,10 +14,12 @@ export const initialState: TaskState = {
 
 export const taskReducer = createReducer(
   initialState,
-  on(loadTaskList, (state) => ({
-    ...state,
-    isLoading: true,
-  })),
+  on(loadTaskList, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
   on(loadTaskListSuccess, (state, { tasks }) => ({
     ...state,
     tasks,
@@ -27,8 +29,10 @@ export const taskReducer = createReducer(
     ...state,
     isLoading: false,
   })),
-  on(appendTask, (state, { task }) => ({
-    ...state,
-    entities: [...state.tasks, task],
-  }))
+  on(appendTask, (state, { task }) => {
+    return {
+      ...state,
+      tasks: [...state.tasks, task],
+    };
+  })
 );

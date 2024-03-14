@@ -1,22 +1,28 @@
 .todo-container {
   margin: auto;
-  max-width: 60dvw;
+  width: 60dvw;
   max-height: 80dvh;
   height: 80dvh;
+
   overflow: hidden;
+  border-top: 2px solid black;
   border-bottom: 2px solid black;
 
   > .header {
-    padding-top: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid gray;
+    padding: 24px 4px;
+
+    border-bottom: 1px dashed gray;
     display: flex;
     justify-content: space-between;
   }
 
-  > div {
+  > .body {
     max-height: calc(80dvh - 71px);
     overflow: auto;
     scrollbar-width: none;
+
+    > .loading {
+      margin-top: 20px;
+    }
   }
 }

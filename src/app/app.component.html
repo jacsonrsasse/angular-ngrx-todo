@@ -8,12 +8,16 @@
     ></app-button>
   </div>
 
-  <div>
-    <app-task-list
-      *ngIf="tasks$ | async as tasks"
-      [tasks]="tasks"
-    ></app-task-list>
+  <div class="body">
+    <ng-container *ngIf="isLoading$ | async; else loaded">
+      <div class="loading">Loading...</div>
+    </ng-container>
   </div>
 </main>
 
-<!-- <app-modal title="Teste" #modal (saveDate)="saveTask($event)"> </app-modal> -->
+<ng-template #loaded>
+  <app-task-list
+    *ngIf="tasks$ | async as tasks"
+    [tasks]="tasks"
+  ></app-task-list>
+</ng-template>

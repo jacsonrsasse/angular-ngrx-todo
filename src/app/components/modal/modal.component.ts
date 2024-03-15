@@ -49,6 +49,7 @@ export class ModalComponent implements OnInit {
     const task = {
       id,
       title: title || '',
+      completed: this.task ? this.task.completed : false,
       description: description || '',
     };
     this.isNew

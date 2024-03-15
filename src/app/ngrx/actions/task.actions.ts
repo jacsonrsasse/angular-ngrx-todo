@@ -16,6 +16,10 @@ export const editTask = createAction(
   '[Task] Edit Task',
   props<{ task: Task }>()
 );
+export const markTask = createAction(
+  '[Task] Mark Task',
+  props<{ id: string; completed: boolean }>()
+);
 export const removeTask = createAction(
   '[Task] Remove Task',
   props<{ id: string }>()

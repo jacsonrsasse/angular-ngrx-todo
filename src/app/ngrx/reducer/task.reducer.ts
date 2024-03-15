@@ -15,11 +15,13 @@ export const taskReducer = createReducer(
       isLoading: true,
     };
   }),
-  on(taskActions.loadTaskListSuccess, (state, { tasks }) => ({
-    ...state,
-    tasks,
-    isLoading: false,
-  })),
+  on(taskActions.loadTaskListSuccess, (state, { tasks }) => {
+    return {
+      ...state,
+      tasks,
+      isLoading: false,
+    };
+  }),
   on(taskActions.loadTaskListError, (state) => ({
     ...state,
     isLoading: false,
@@ -32,6 +34,15 @@ export const taskReducer = createReducer(
   }),
   on(taskActions.editTask, (state, { task }) => {
     const tasks = state.tasks.map((t) => (t.id === task.id ? task : t));
+    return {
+      ...state,
+      tasks,
+    };
+  }),
+  on(taskActions.markTask, (state, { id, completed }) => {
+    const tasks = state.tasks.map((task) =>
+      task.id === id ? { ...task, completed } : task
+    );
     return {
       ...state,
       tasks,

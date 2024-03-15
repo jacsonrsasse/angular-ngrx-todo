@@ -1,4 +1,8 @@
-<li class="task-container">
+<li
+  class="task-container"
+  (dblclick)="markTask()"
+  [ngClass]="{ '-completed': task.completed }"
+>
   <p class="title">{{ task.title }}</p>
 
   <div class="actions">

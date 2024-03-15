@@ -6,6 +6,12 @@
   padding: 12px;
   transition: ease 0.2s;
 
+  &.-completed {
+    > .title {
+      text-decoration: line-through;
+    }
+  }
+
   > .title {
     max-width: 300px;
     text-overflow: ellipsis;

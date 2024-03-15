@@ -37,6 +37,10 @@ export class AppService {
     this.store.dispatch(TaskActions.editTask({ task }));
   }
 
+  markTask(task: Task, completed: boolean) {
+    this.store.dispatch(TaskActions.markTask({ id: task.id, completed }));
+  }
+
   deleteTask(task: Task) {
     this.store.dispatch(TaskActions.removeTask({ id: task.id }));
   }

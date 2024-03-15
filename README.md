@@ -1,27 +1,24 @@
 # AngularNgrxTodo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
+This project was a little study case about Angular Ngrx, and how we can use it with some API. Here I used LocalStorage to mock a database, but instead, we could do some API call, just using the effects.
 
-## Development server
+I split every file in a specific folder, to keep things more understandable.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- `task.actions` is where I declared the actions that my app will use.
+- `task.reducer` is responsible for make changes, and it is triggered when an action happens.
+- `task.selectors` is used to retrieve data from the state
+- `task.state` is just interfaces that represent task state
+- `task.effects` is what call my external API
 
-## Code scaffolding
+In my opinion, is a little to much have so many files to make one or two things happen. But is a fact that we can keep our components free from unnecessary responsibilities, as call an API.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Talking about the components, they are very simple. For the modal I apllied Angular Cdk Overlay, what was very nice to do. And it ended quite simple, just check the `modal.service` to understand.
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### Applied Technologies
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Angular
+- Ngrx
+- Ngrx Effects
+- Angular Cdk Overlay

@@ -34,7 +34,7 @@ export class AppService {
   }
 
   editTask(task: Task) {
-    // this.store.dispatch(TaskActions.editTask({ task }));
+    this.store.dispatch(TaskActions.editTask({ task }));
   }
 
   deleteTask(task: Task) {

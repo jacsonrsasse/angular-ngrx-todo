@@ -3,7 +3,7 @@ import { Task } from '../states/task.state';
 
 export const loadTaskList = createAction('[Task] Load Task List');
 export const loadTaskListSuccess = createAction(
-  '[Task] Load Task List Sucess',
+  '[Task] Load Task List Success',
   props<{ tasks: Task[] }>()
 );
 export const loadTaskListError = createAction('[Task] Load Task List Error');

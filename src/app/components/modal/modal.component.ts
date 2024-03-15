@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { CommonModule } from '@angular/common';
 import { ModalService } from '../../services/modal.service';
@@ -9,6 +9,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AppService } from '../../services/app.service';
+import { Task } from '../../ngrx/states/task.state';
 
 @Component({
   selector: 'app-modal',
@@ -17,8 +19,9 @@ import {
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit {
   @Input() isNew!: boolean;
+  @Input({ required: false }) task!: Task | undefined;
 
   taskForm = this.formBuilder.group({
     title: ['', Validators.required],
@@ -26,18 +29,33 @@ export class ModalComponent {
   });
 
   constructor(
+    private readonly appService: AppService,
     private readonly modalService: ModalService,
     private readonly formBuilder: FormBuilder
   ) {}
 
+  ngOnInit(): void {
+    if (this.task) {
+      const { title, description } = this.task;
+      this.taskForm.setValue({ title, description: description || '' });
+    }
+  }
+
   onClickSave() {
     const { title, description } = this.taskForm.getRawValue();
 
-    this.modalService.saveTask({
-      id: uuidv4(),
+    const id = !this.isNew && this.task ? this.task.id : uuidv4();
+
+    const task = {
+      id,
       title: title || '',
       description: description || '',
-    });
+    };
+    this.isNew
+      ? this.appService.saveTask(task)
+      : this.appService.editTask(task);
+
+    this.modalService.close();
   }
 
   onClickCancel() {

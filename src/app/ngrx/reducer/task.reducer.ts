@@ -1,11 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { TaskState } from '../states/task.state';
-import {
-  appendTask,
-  loadTaskList,
-  loadTaskListError,
-  loadTaskListSuccess,
-} from '../actions/task.actions';
+import * as taskActions from '../actions/task.actions';
 
 export const initialState: TaskState = {
   tasks: [],
@@ -14,25 +9,39 @@ export const initialState: TaskState = {
 
 export const taskReducer = createReducer(
   initialState,
-  on(loadTaskList, (state) => {
+  on(taskActions.loadTaskList, (state) => {
     return {
       ...state,
       isLoading: true,
     };
   }),
-  on(loadTaskListSuccess, (state, { tasks }) => ({
+  on(taskActions.loadTaskListSuccess, (state, { tasks }) => ({
     ...state,
     tasks,
     isLoading: false,
   })),
-  on(loadTaskListError, (state) => ({
+  on(taskActions.loadTaskListError, (state) => ({
     ...state,
     isLoading: false,
   })),
-  on(appendTask, (state, { task }) => {
+  on(taskActions.appendTask, (state, { task }) => {
     return {
       ...state,
       tasks: [...state.tasks, task],
+    };
+  }),
+  on(taskActions.editTask, (state, { task }) => {
+    const tasks = state.tasks.map((t) => (t.id === task.id ? task : t));
+    return {
+      ...state,
+      tasks,
+    };
+  }),
+  on(taskActions.removeTask, (state, { id }) => {
+    const tasks = state.tasks.filter((task) => task.id !== id);
+    return {
+      ...state,
+      tasks,
     };
   })
 );

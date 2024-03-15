@@ -2,11 +2,15 @@
   <p class="title">{{ task.title }}</p>
 
   <div class="actions">
-    <app-button icon="edit" type="icon" [onClick]="onClickEdit"></app-button>
+    <app-button
+      icon="edit"
+      type="icon"
+      [onClick]="onClickEdit.bind(this)"
+    ></app-button>
     <app-button
       icon="delete"
       type="icon"
-      [onClick]="onClickDelete"
+      [onClick]="onClickDelete.bind(this)"
     ></app-button>
   </div>
 </li>

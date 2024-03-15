@@ -23,4 +23,20 @@ export class LocalStorageService {
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
+
+  editTask(task: Task) {
+    const tasks = this.getItemTasks();
+    const index = tasks.findIndex((t) => t.id === task.id);
+    tasks[index] = task;
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
+  removeTask(id: string) {
+    const tasks = this.getItemTasks();
+    const index = tasks.findIndex((t) => t.id === id);
+    tasks.splice(index, 1);
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
 }

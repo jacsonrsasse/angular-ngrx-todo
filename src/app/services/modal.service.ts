@@ -3,7 +3,6 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ModalComponent } from '../components/modal/modal.component';
 import { Task } from '../ngrx/states/task.state';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,24 +10,8 @@ import { Subject } from 'rxjs';
 export class ModalService {
   private overlayRef?: OverlayRef;
   private modalPortal!: ComponentPortal<ModalComponent>;
-  private _task$ = new Subject<Task>();
 
   constructor(private overlayService: Overlay) {}
-
-  openModalNewTask() {
-    this.generatePortal();
-
-    this.modalPortal.component.prototype.isNew = true;
-
-    this.openModal();
-  }
-
-  openModalEditTask() {}
-
-  saveTask(taskInfo: Task) {
-    this._task$.next(taskInfo);
-    this.close();
-  }
 
   close() {
     if (!this.overlayRef) return;
@@ -37,15 +20,13 @@ export class ModalService {
     this.overlayRef = undefined;
   }
 
-  get task$() {
-    return this._task$.asObservable();
-  }
-
   private generatePortal() {
     this.modalPortal = new ComponentPortal(ModalComponent);
   }
 
-  private openModal() {
+  openModal(task?: Task) {
+    this.generatePortal();
+
     const config = new OverlayConfig({
       positionStrategy: this.overlayService
         .position()
@@ -58,7 +39,11 @@ export class ModalService {
 
     this.overlayRef = this.overlayService.create(config);
 
-    this.overlayRef.attach(this.modalPortal);
+    const componentRef = this.overlayRef.attach(this.modalPortal);
+
+    componentRef.instance.isNew = !task;
+    componentRef.instance.task = task;
+
     this.overlayRef.backdropClick().subscribe(() => {
       this.close();
     });

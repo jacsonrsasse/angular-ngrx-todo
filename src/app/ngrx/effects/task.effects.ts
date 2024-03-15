@@ -33,4 +33,26 @@ export class TaskEffects {
       )
     )
   );
+
+  editTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TaskListActions.editTask),
+      mergeMap(({ task }) =>
+        of(this.localStorageService.editTask(task)).pipe(
+          map(() => TaskListActions.complete())
+        )
+      )
+    )
+  );
+
+  removeTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TaskListActions.removeTask),
+      mergeMap(({ id }) =>
+        of(this.localStorageService.removeTask(id)).pipe(
+          map(() => TaskListActions.complete())
+        )
+      )
+    )
+  );
 }

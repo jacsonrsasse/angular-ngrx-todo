@@ -1,21 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TaskListComponent } from './components/task-list/task-list.component';
-import { Store } from '@ngrx/store';
-import {
-  appendTask,
-  loadTaskList,
-  loadTaskListSuccess,
-} from './ngrx/actions/task.actions';
-import {
-  isLoadingSelector,
-  taskListSelector,
-} from './ngrx/selectors/task.selectors';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './components/button/button.component';
 import { Task } from './ngrx/states/task.state';
 import { ModalService } from './services/modal.service';
 import { Observable } from 'rxjs';
+import { AppService } from './services/app.service';
 
 @Component({
   selector: 'app-root',
@@ -24,29 +15,25 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  tasks$!: Observable<Task[]>;
-  isLoading$!: Observable<boolean>;
-
+export class AppComponent implements OnInit {
   constructor(
-    private readonly store: Store,
+    private readonly appService: AppService,
     private readonly modalService: ModalService
-  ) {
-    this.tasks$ = this.store.select(taskListSelector);
-    this.isLoading$ = this.store.select(isLoadingSelector);
+  ) {}
 
-    this.modalService.task$.subscribe((task) => {
-      this.store.dispatch(appendTask({ task }));
-    });
-
-    this.loadTasks();
+  ngOnInit() {
+    this.appService.loadTasks();
   }
 
-  private loadTasks() {
-    this.store.dispatch(loadTaskList());
+  get tasks$(): Observable<Task[]> {
+    return this.appService.tasks$;
+  }
+
+  get isLoading$(): Observable<boolean> {
+    return this.appService.isLoading$;
   }
 
   onClickAdd() {
-    this.modalService.openModalNewTask();
+    this.modalService.openModal();
   }
 }

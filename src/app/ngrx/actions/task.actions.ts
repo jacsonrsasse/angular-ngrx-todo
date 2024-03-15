@@ -12,5 +12,13 @@ export const appendTask = createAction(
   '[Task] Append Task',
   props<{ task: Task }>()
 );
+export const editTask = createAction(
+  '[Task] Edit Task',
+  props<{ task: Task }>()
+);
+export const removeTask = createAction(
+  '[Task] Remove Task',
+  props<{ id: string }>()
+);
 
 export const complete = createAction('[Task] Complete');

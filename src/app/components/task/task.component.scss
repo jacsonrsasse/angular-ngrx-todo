@@ -38,3 +38,21 @@
     background-color: #cdcdcd;
   }
 }
+
+.overlay {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: grey;
+  text-align: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 48%;
+    top: 110%;
+    transform: rotate(45deg) translateX(-80%) translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: grey;
+  }
+}

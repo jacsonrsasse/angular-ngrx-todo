@@ -2,6 +2,8 @@
   class="task-container"
   (dblclick)="markTask()"
   [ngClass]="{ '-completed': task.completed }"
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
 >
   <p class="title">{{ task.title }}</p>
 
@@ -18,3 +20,23 @@
     ></app-button>
   </div>
 </li>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="hovered"
+  [cdkConnectedOverlayPositions]="[
+    {
+      originX: 'end',
+      originY: 'top',
+      overlayX: 'end',
+      overlayY: 'bottom',
+      offsetY: -10
+    }
+  ]"
+  cdkConnectedOverlayWidth="150px"
+>
+  <div class="overlay">
+    Double click to mark as {{ task.completed ? "incompleted" : "completed" }}
+  </div>
+</ng-template>

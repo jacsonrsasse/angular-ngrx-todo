@@ -22,3 +22,4 @@ Talking about the components, they are very simple. For the modal I apllied Angu
 - Ngrx
 - Ngrx Effects
 - Angular Cdk Overlay
+- Angular animations

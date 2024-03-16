@@ -32,6 +32,14 @@ export class LocalStorageService {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
 
+  markTask(id: string, completed: boolean) {
+    const tasks = this.getItemTasks();
+    const index = tasks.findIndex((t) => t.id === id);
+    tasks[index].completed = completed;
+
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+
   removeTask(id: string) {
     const tasks = this.getItemTasks();
     const index = tasks.findIndex((t) => t.id === id);

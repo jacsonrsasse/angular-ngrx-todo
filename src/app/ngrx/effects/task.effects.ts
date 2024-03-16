@@ -45,6 +45,17 @@ export class TaskEffects {
     )
   );
 
+  markTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TaskListActions.markTask),
+      mergeMap(({ id, completed }) =>
+        of(this.localStorageService.markTask(id, completed)).pipe(
+          map(() => TaskListActions.complete())
+        )
+      )
+    );
+  });
+
   removeTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TaskListActions.removeTask),

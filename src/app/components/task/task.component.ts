@@ -5,13 +5,7 @@ import { ModalService } from '../../services/modal.service';
 import { AppService } from '../../services/app.service';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { trigger, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-task',
@@ -20,23 +14,12 @@ import {
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
   animations: [
-    trigger('hover', [
-      state(
-        'inactive',
-        style({
-          opacity: 0,
-          transform: 'scale(0.8)',
-        })
-      ),
-      state(
-        'active',
-        style({
-          opacity: 1,
-          transform: 'scale(1)',
-        })
-      ),
-      transition('inactive => active', animate('200ms ease-in')),
-      transition('active => inactive', animate('200ms ease-out')),
+    trigger('flyInOut', [
+      transition(':enter', [
+        style({ opacity: '0' }),
+        animate('200ms 1s ease-in', style({ opacity: '1' })),
+      ]),
+      transition(':leave', [animate(200, style({ opacity: '0' }))]),
     ]),
   ],
 })

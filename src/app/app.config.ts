@@ -7,6 +7,8 @@ import { taskReducer } from './ngrx/reducer/task.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { TaskEffects } from './ngrx/effects/task.effects';
 
+import { provideAnimations } from '@angular/platform-browser/animations';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -14,5 +16,6 @@ export const appConfig: ApplicationConfig = {
       tasks: taskReducer,
     }),
     provideEffects([TaskEffects]),
+    provideAnimations(),
   ],
 };

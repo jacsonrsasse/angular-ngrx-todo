@@ -36,7 +36,7 @@
   ]"
   cdkConnectedOverlayWidth="150px"
 >
-  <div class="overlay">
+  <div class="overlay" [@flyInOut]="hovered ? 'show' : 'hide'">
     Double click to mark as {{ task.completed ? "incompleted" : "completed" }}
   </div>
 </ng-template>
